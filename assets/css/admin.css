@@ -1,0 +1,48 @@
+#w4c-content .w4c-admin-title{
+	font-size: 1.4em;
+	margin: 1.6em 0 1em;
+	padding: 0 0 6px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#w4c .box-status{
+	display: inline-block;
+	padding: 3px 6px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#w4c .box-status.connected{
+	background-color: green;
+}
+#w4c .box-status.disconnected{
+	background-color: red;
+}
+#w4c .remove-input-destination i{
+	line-height: 28px;
+}
+#w4c-content .slider, #w4c-content .slider2{
+	width: 40%;
+	display: inline-block;
+}
+#w4c-content .slider,
+#w4c-content .w4c-slider-label{
+	margin-right: 20px;
+}
+#w4c-content .w4c-slider-label,
+#w4c-content .w4c-slider2-label{
+	text-align: center;
+	width: 40%;
+	display: inline-block;
+}
+#w4c-content .ui-slider-range{
+	background-color: #51a351;
+	background-image: none;
+}
+#w4c-content .table-title{
+	text-align: center;
+	font-size: 19px;
+	font-weight: bold;
+}
+#w4c-content .input-shortcode{ text-align: center;}
