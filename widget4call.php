@@ -2,8 +2,8 @@
 /*
 Plugin Name: Widget4Call
 Description: Plugin WordPress By Widget4Call
-Version: 0.1
-Author: R3load
+Version: 1.0
+Author: APIdaze
 */
 class Widget4Call_Plugin{
 	
