@@ -1,9 +1,10 @@
 <?php
 /*
 Plugin Name: Widget4Call
-Description: Plugin WordPress By Widget4Call
+Description: Click to Call and Web Call Back solution By APIdaze
 Version: 1.0.1
 Author: APIdaze
+Author URI: https://developers.apidaze.io
 */
 class Widget4Call_Plugin{
 	
