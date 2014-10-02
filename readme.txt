@@ -32,13 +32,13 @@ This section describes how to install the plugin and get it working.
 
 == Screenshots ==
 
-1. Widget form .
+1. Widget form phone settings (Number to call, caller id to display, opening hours, etc.).
 
 2. Widget form display settings.
 
 3. Start call in browser.
 
-4. Don't activated the microphone.
+4. The microphone is not activated.
 
 5. Web Call Back.
 == Changelog ==
