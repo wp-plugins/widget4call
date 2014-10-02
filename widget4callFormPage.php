@@ -223,11 +223,11 @@ class Widget4CallFormPage
                 </td>
               </tr>
               <tr valign="top">
-                <td scope="row"><label for="w4c-tod-message">Tod Message : </label></td>
+                <td scope="row"><label for="w4c-tod-message">Message hors horaire: </label></td>
                 <td><textarea id="w4c-tod-message" name="w4c-tod-message" cols="30" rows="5" class="widefat"><?php echo $widget['tod-message']?></textarea></td>
               </tr>
               <tr valign="top">
-                <td scope="row"><label for="w4c-callback-email">Email callback : </label></td>
+                <td scope="row"><label for="w4c-callback-email">Email de callback : </label></td>
                 <td><input type="text" id="w4c-callback-email" name="w4c-callback-email" value="<?php echo $widget['callback-email']?>" class="widefat" /></td>
               </tr>
               <tr valign="top">

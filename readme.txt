@@ -12,9 +12,9 @@ Click to Call and Web Call Back solution.
 
 == Description ==
 
-Widget4Call is a **Click to Call and a Web Call Back solution** which allow yours customers to easily and freely contact you.
+Widget4Call is a **Click to Call and a Web Call Back solution** which allows yours customers to easily and freely contact you on the phone.
 
- You can easily add a call button in your WordPress website. Yours customers don't need to install any software. You receive all calls in your phone, **don't need to insatll software**.
+You can easily add a call button in your WordPress website. Yours customers don't need to install any software. You receive calls on your phone, **don't need to insatll software**.
 
 == Installation ==
 
@@ -32,8 +32,15 @@ This section describes how to install the plugin and get it working.
 
 == Screenshots ==
 
+1. Widget form .
 
+2. Widget form display settings.
 
+3. Start call in browser.
+
+4. Don't activated the microphone.
+
+5. Web Call Back.
 == Changelog ==
 
 
