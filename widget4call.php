@@ -2,7 +2,7 @@
 /*
 Plugin Name: Widget4Call
 Description: Plugin WordPress By Widget4Call
-Version: 1.0
+Version: 1.O.1
 Author: APIdaze
 */
 class Widget4Call_Plugin{
