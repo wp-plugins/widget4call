@@ -71,7 +71,7 @@ class Widget4CallFormPage
     );
   }
 
-	public static function html_w4c_widgetformpage(){
+  public static function html_w4c_widgetformpage(){
     ?>
     <div id="w4c" class="wrap">
       <h2>Widget4Call for WordPress</h2>
@@ -98,7 +98,8 @@ class Widget4CallFormPage
               </tr>
               <tr valign="top">
                 <td scope="row"><label for="w4c-immediat-recall">Uniquement rappel : </label></td>
-                <td><input type="checkbox" id="w4c-immediat-recall" name="w4c-immediat-recall" value="<?php echo $widget['immediat-recall']?>" class="widefat" /></td>
+                <td><input type="checkbox" id="w4c-immediat-recall" name="w4c-immediat-recall" value="<?php echo $widget['immediat-recall']?>" class="widefat" 
+                  <?php if($widget['immediat-recall']) {echo 'checked';}?>/></td>
               </tr>
               <tr valign="top">
                 <td scope="row"><label for="w4c-destinations">Numéro à appeler : </label></td>
@@ -401,7 +402,7 @@ class Widget4CallFormPage
         $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}".Widget4Call_Plugin::W4C_DB_WIDGET." WHERE id = '%d';", $_GET['id']),ARRAY_A);
         if($row){
           $response = wp_remote_get('https://w4c.widget4call.fr/fr/wp/'.get_option('w4c_private_key').'/widgets/'.$row['_id']);
-           $response = json_decode(wp_remote_retrieve_body($response));
+          $response = json_decode(wp_remote_retrieve_body($response));
           if($response->status == 'ok'){
             $array = get_object_vars($response->data);
             $array['tod'] = get_object_vars($array['tod']);
