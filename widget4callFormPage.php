@@ -330,6 +330,8 @@ class Widget4CallFormPage
   }
 
   public static function process_action(){
+    wp_enqueue_style('jquery-style', plugins_url( '/assets/css/jquery-ui-smoothness.css', __FILE__));
+    
     Widget4Call_Plugin::getUser();
     $w4c_private_key = get_option('w4c_private_key');
     if(!empty($w4c_private_key)){
