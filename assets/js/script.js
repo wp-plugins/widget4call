@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
   var options = {
     change: function(event, ui){
+      $(this).val($(this).wpColorPicker( 'color' ));
       $(' #w4c-content input[name="w4c-size"]').trigger('change');
     }
   };
@@ -154,7 +155,7 @@ jQuery(document).ready(function($){
         var button_header_bg_color = $('#w4c-content input[name="w4c-header-bg-color"]').val();
         var button_header_color = $('#w4c-content input[name="w4c-header-color"]').val();
         var button_content_bg_color = $('#w4c-content input[name="w4c-content-bg-color"]').val();
-        var button_content_color = $('#w4c-content input[name="w4c-content-color"]:checked').val();
+        var button_content_color = $('#w4c-content input[name="w4c-content-color"]').val();
         var button_header_text  = $('#w4c-content input[name="w4c-header-text"]').val();
         var button_content_text  = $('#w4c-content textarea[name="w4c-content-text"]').val();
         var button_content_img  = $('#w4c-content #w4c-content-img-src').val();
