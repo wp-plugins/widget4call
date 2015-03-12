@@ -13,7 +13,7 @@ class Widget4CallFormPage
       'destinations' => array(),
       'timeouts' => array(),
       'strategy' => 'simultaneous',
-      'message-pa' => '',
+      'pa-message' => '',
       'tod-active' => true,
       'tod' => array(
         'mondayactive' => true,
@@ -126,8 +126,8 @@ class Widget4CallFormPage
                 </td>
               </tr>
               <tr valign="top">
-                <td scope="row"><label for="w4c-message-pa">Message vocal en début d'appel : </label></td>
-                <td><input type="text" id="w4c-message-pa" name="w4c-message-pa" value="<?php echo $widget['message-pa']?>" class="widefat" /></td>
+                <td scope="row"><label for="w4c-pa-message">Message vocal en début d'appel : </label></td>
+                <td><input type="text" id="w4c-pa-message" name="w4c-pa-message" value="<?php echo $widget['pa-message']?>" class="widefat" /></td>
               </tr>
               <tr valign="top">
                 <td scope="row" colspan="2" class="table-title">Horaire : <input type="checkbox" id="w4c-tod-active" name="w4c-tod-active" value="true" checked/></td>
@@ -348,7 +348,7 @@ class Widget4CallFormPage
           'name'                      => stripslashes($_POST['w4c-name']),
           'phone-display'             => $_POST['w4c-phone-display'],
           'phone-customer-display'    => $_POST['w4c-phone-customer-display'],
-          'message-pa'                => stripslashes($_POST['w4c-message-pa']),
+          'pa-message'                => stripslashes($_POST['w4c-pa-message']),
           'strategy'                  => $_POST['w4c-strategy'],
           'destinations'              => $_POST['w4c-destinations'],
           'timeouts'                  => $_POST['w4c-timeouts'],
