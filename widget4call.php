@@ -2,7 +2,7 @@
 /*
 Plugin Name: Widget4Call
 Description: Click to Call and Web Call Back solution By APIdaze
-Version: 1.0.6
+Version: 1.0.7
 Author: APIdaze
 Author URI: https://developers.apidaze.io
 */

@@ -15,7 +15,7 @@ class Widget4CallShortcode
 			if(!is_null($row) && ($row->type == "btn" || ($row->type == "notif" && Widget4Call_Plugin::$countNotif == 0 ))){
 				if($row->type == "notif")
 					Widget4Call_Plugin::$countNotif++;
-				echo $row->code;
+				return $row->code;
 			}
 		}
 	}
