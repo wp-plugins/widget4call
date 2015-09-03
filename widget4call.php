@@ -24,6 +24,8 @@ class Widget4Call_Plugin{
 		include_once(plugin_dir_path(__FILE__).'/widget4callDeletePage.php');
 		include_once(plugin_dir_path(__FILE__).'/widget4callUserPage.php');
 		include_once(plugin_dir_path(__FILE__).'/widget4callWidget.php');
+		include_once(plugin_dir_path(__FILE__).'/widget4callDevModePage.php');
+
 		new Widget4CallInstall();
 		new Widget4CallAssets();
 		new Widget4CallMenu();
@@ -35,6 +37,7 @@ class Widget4Call_Plugin{
 		new Widget4CallFormPage();
 		new Widget4CallUserPage();
 		new Widget4CallDeletePage();
+		new Widget4CallDevModePage();
 
 		add_action('init', array($this, 'register_session'));
 		add_action('widgets_init', function(){register_widget('Widget4CallWidget');});

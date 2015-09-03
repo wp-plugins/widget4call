@@ -27,5 +27,7 @@ class Widget4CallMenu
     //Generate shorcode
     $hook = add_submenu_page(null, 'Add externale Widget', 'Add externale Widget', 'manage_options', 'w4c_add_external_widget', array('Widget4CallListPage', 'add_external_widget'));
     add_action('load-'.$hook, array('Widget4CallListPage', 'process_action'));
+    $hook = add_submenu_page(null, 'Dev Mode', 'Dev Mode', 'manage_options', 'w4c_devmode', array('Widget4CallDevModePage', 'html_w4c_devmodepage'));
+    add_action('load-'.$hook, array('Widget4CallDevModePage', 'process_action'));
   }
 }

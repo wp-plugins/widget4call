@@ -9,7 +9,7 @@ class Widget4CallFormPage
       'name' => '',
       'phone-display' => '0100000001',
       'phone-customer-display' => '0100000001',
-      'immediat-recall' => false,
+      'immediat-recall' => true,
       'destinations' => array(),
       'timeouts' => array(),
       'strategy' => 'simultaneous',
@@ -62,7 +62,8 @@ class Widget4CallFormPage
       'button-content-bg-color' => '#ffffff',
       'button-content-color' => '#000000',
       'button-content-text' => "Appel gratuit\nmise en relation immediate",
-      'button-content-img' => '',
+      'button-content-img' => 'agent1.png',
+      'button-content-img-dir' => 'img/',
       'button-size' => 'lg',
       'button-color' => '#305394',
       'button-text-color' => '#ffffff',
@@ -83,6 +84,7 @@ class Widget4CallFormPage
         $widget = Widget4CallFormPage::$widget; ?>
           <form method="post" action="" enctype="multipart/form-data">
             <input type="hidden" name="_id" value="<?php echo $widget['_id']?>"/>
+            <input type="hidden" name="id" value="<?php echo $widget['_id']?>"/>
             <table class="form-table">
               <tr valign="top">
                 <td scope="row"><label for="w4c-name">Nom du Widget : </label></td>
@@ -95,11 +97,6 @@ class Widget4CallFormPage
               <tr valign="top">
                 <td scope="row"><label for="w4c-phone-customer-display">Numéro à afficher (prospect) : </label></td>
                 <td><input type="text" id="w4c-phone-customer-display" name="w4c-phone-customer-display" value="<?php echo $widget['phone-customer-display']?>" required class="widefat" /></td>
-              </tr>
-              <tr valign="top">
-                <td scope="row"><label for="w4c-immediat-recall">Uniquement rappel : </label></td>
-                <td><input type="checkbox" id="w4c-immediat-recall" name="w4c-immediat-recall" value="<?php echo $widget['immediat-recall']?>" class="widefat" 
-                  <?php if($widget['immediat-recall']) {echo 'checked';}?>/></td>
               </tr>
               <tr valign="top">
                 <td scope="row"><label for="w4c-destinations">Numéro à appeler : </label></td>
@@ -130,7 +127,9 @@ class Widget4CallFormPage
                 <td><input type="text" id="w4c-pa-message" name="w4c-pa-message" value="<?php echo $widget['pa-message']?>" class="widefat" /></td>
               </tr>
               <tr valign="top">
-                <td scope="row" colspan="2" class="table-title">Horaire : <input type="checkbox" id="w4c-tod-active" name="w4c-tod-active" value="true" checked/></td>
+                <td scope="row" colspan="2" class="table-title">Horaire : 
+                <input type="checkbox" id="w4c-tod-active" name="w4c-tod-active" 
+                value="<?php echo $widget['tod-active']; ?>"<?php if($widget['tod-active']) echo 'checked'?>/></td>
               </tr>
               <tr valign="top" class="w4c-tod-wrap">
                 <td scope="row"><label>Lundi </label> <input type="checkbox" name="w4c-tod[mondayactive]" class="w4c-day-active" <?php if($widget['tod']['mondayactive']) echo 'checked';?>/></td>
@@ -236,6 +235,7 @@ class Widget4CallFormPage
                 <td>
                   <input type="radio" id="w4c-type" name="w4c-type" value="notif" class="widefat" <?php if($widget['button-type'] == 'notif') echo "checked"?> /> Fenetre de notification
                   <input type="radio" id="w4c-type" name="w4c-type" value="btn" class="widefat" <?php if($widget['button-type'] == 'btn') echo "checked"?>/> Bouton
+                  <input type="radio" id="w4c-type" name="w4c-type" value="dev-mode" class="widefat" <?php if($widget['button-type'] == 'dev-mode') echo "checked"?>/> Mode développeur 
                 </td>
               </tr>
               <tr valign="top" class="w4c-display-header-wrap">
@@ -253,10 +253,6 @@ class Widget4CallFormPage
                 <td scope="row"><label for="w4c-header-text">Texte : </label></td>
                 <td><input type="text" id="w4c-header-text" name="w4c-header-text" value="<?php echo $widget['button-header-text']?>" class="widefat" /></td>
               </tr>
-              <!--tr valign="top" class="w4c-display-header-wrap">
-                <td scope="row"><label for="w4c-content-img">Image : </label></td>
-                <td><input type="file" id="w4c-content-img" name="w4c-content-img" value="<?php echo $widget['button-content-img']?>" class="widefat" /></td>
-              </tr-->
               <tr valign="top" class="w4c-display-content-wrap">
                 <td scope="row"><label for="w4c-header-icon-active">Icone téléphone : </label></td>
                 <td><input type="checkbox" id="w4c-header-icon-active" name="w4c-header-icon-active" value="1" class="widefat" <?php if($widget['button-header-icon-active']) echo 'checked'; ?>/></td>
@@ -276,10 +272,39 @@ class Widget4CallFormPage
                 <td scope="row"><label for="w4c-content-text">Texte : </label></td>
                 <td><textarea name="w4c-content-text" id="w4c-content-text" class="widefat"><?php echo $widget['button-content-text']?></textarea></td>
               </tr>
-              <!--tr valign="top" class="w4c-display-content-wrap">
-                <td scope="row"><label for="w4c-content-img">image : </label></td>
-                <td><input type="file" id="w4c-content-img" name="w4c-content-img" value="<?php echo $widget['button-content-img']?>" class="widefat" /></td>
-              </tr-->
+              <tr valign="top" class="w4c-display-header-wrap">
+                 <td scope="row"><label for="w4c-content-img">Image :</label><br />
+                    <small>Pour insérer une image personnalisée,<br/>
+                    veuillez vous rendre sur le backoffice<br/> 
+                    de Widget4Call https://w4c.widget4call.fr</small>
+                  </td>
+                 <td>
+                    <ul>
+                      <li>
+                        <img class="default-agent" alt="icon1" src="<?php echo plugins_url( 'assets/img/agent1.png', __FILE__ ); ?>">
+                        <input type="radio" value="agent1.png" class="agent-logo widefat" name="w4c-content-img"
+                        <?php if($widget['button-content-img'] == 'agent1.png') echo "checked"; ?> > 
+                      </li>
+                      <li>
+                        <img class="default-agent" alt="icon2" src="<?php echo plugins_url( 'assets/img/agent2.png', __FILE__ ); ?>">
+                        <input type="radio" value="agent2.png" class="agent-logo widefat" name="w4c-content-img"
+                        <?php if($widget['button-content-img'] == 'agent2.png') echo "checked"; ?> >
+                      </li>
+                      <li>
+                        <img class="default-agent" alt="icon2" src="<?php echo plugins_url( 'assets/img/agent3.png', __FILE__ ); ?>">
+                        <input type="radio" value="agent3.png" class="agent-logo widefat" name="w4c-content-img"
+                        <?php if($widget['button-content-img'] == 'agent3.png') echo "checked"; ?> >
+                      </li>
+                      <li>
+                        <img class="default-agent" alt="icon2" src="<?php echo plugins_url( 'assets/img/agent4.png', __FILE__ ); ?>">
+                        <input type="radio" value="agent4.png" class="agent-logo widefat" name="w4c-content-img"
+                        <?php if($widget['button-content-img'] == 'agent4.png') echo "checked"; ?> >
+                      </li>
+                    </ul>
+                    <input type="hidden" name="w4c-content-img-dir" value="<?php echo  $widget['button-content-img-dir']; ?>" />
+                    <input type="hidden" name="w4c-content-img-default" value="<?php echo  $widget['button-content-img']; ?>" >
+                  </td>
+              </tr>
               <tr valign="top" class="w4c-display-btn-wrap">
                 <td scope="row" colspan="2" class="table-title">Widget</td>
               </tr>
@@ -308,20 +333,25 @@ class Widget4CallFormPage
                 <td scope="row"><label for="w4c-text">Texte : </label></td>
                 <td><textarea name="w4c-text" id="w4c-text" class="widefat"><?php echo $widget['button-text']?></textarea></td>
               </tr>
-              <tr valign="top">
+              <tr valign="top" class="w4c-btn-result">
                 <td scope="row"><label for="w4c-text">Résultat : </label></td>
                 <td><span id="button-display"></span></td>
+              </tr>
+              <tr valign="top" class="w4c-dev-mode">
+              <?php $dev_mode_link = 'admin.php?page=w4c_devmode&_id='.$widget['_id']; ?>
+                <td scope="row"><label for="w4c-text">Lien HTTP pour la page de Mode développeur : </label></td>
+                <td><a href="<?php echo admin_url($dev_mode_link);  ?>">Mode développeur</a></td>
               </tr>
             </table>
             <?php submit_button('Enregistrer'); ?>
           </form>
           <div class="hide trad" style="display:none">
-            <span id="notif2Call">Depuis votre ordinateur</span>
+            <!-- <span id="notif2Call">Depuis votre ordinateur</span> -->
             <span id="notif2Recall">On vous rappelle</span>
             <span id="notif2CallHover">Activez votre micro et vos hauts parleurs</span>
             <span id="notif2RecallHover">Renseignez votre numéro pour être rappelé</span>
           </div>
-          <?php
+          <?php 
         } else{ ?>
           <p>Vous devez tout d'abord renseigner votre clé Widget4Call : <a href="<?php echo admin_url('admin.php?page=widget4call')?>">cliquez ici</a></p><?php
         } ?>
@@ -344,6 +374,7 @@ class Widget4CallFormPage
       }
       
       if (isset($_POST['w4c-name'])) {
+
         $params = array(
           'name'                      => stripslashes($_POST['w4c-name']),
           'phone-display'             => $_POST['w4c-phone-display'],
@@ -352,7 +383,7 @@ class Widget4CallFormPage
           'strategy'                  => $_POST['w4c-strategy'],
           'destinations'              => $_POST['w4c-destinations'],
           'timeouts'                  => $_POST['w4c-timeouts'],
-          'immediat-recall'           => $_POST['w4c-immediat-recall'],
+          'immediat-recall'           => true,
           'tod-active'                => $_POST['w4c-tod-active'],
           'tod'                       => $_POST['w4c-tod'],
           'tod-message'               => stripslashes($_POST['w4c-tod-message']),
@@ -370,7 +401,8 @@ class Widget4CallFormPage
           'button-color'              => $_POST['w4c-color'],
           'button-header-icon-active' => $_POST['w4c-header-icon-active'],
           'button-icon-active'        => $_POST['w4c-icon-active'],
-          //'button-content-img'        => $_POST['w4c-name'],
+          'button-content-img'        => $_POST['w4c-content-img']?$_POST['w4c-content-img']:$_POST['w4c-content-img-default'],
+          'button-content-img-dir'    => $_POST['w4c-content-img']?'img/': $_POST['w4c-content-img-dir']
         );
         $url ='https://w4c.widget4call.fr/fr/wp/'.get_option('w4c_private_key').'/widgets';
         if(!empty($_POST['_id'])){
@@ -380,12 +412,15 @@ class Widget4CallFormPage
         $response = wp_remote_post($url, array('body' => $params));
         $response = json_decode(wp_remote_retrieve_body($response));
         if($response->status == 'ok'){
-          if(empty($_POST['_id']))
+          if(empty($_POST['_id'])){
             $row = $wpdb->query(
               $wpdb->prepare("INSERT INTO {$wpdb->prefix}".Widget4Call_Plugin::W4C_DB_WIDGET." (name, _id, type, code) Values (%s, %s, %s, %s)",$_POST['w4c-name'],$response->id,$_POST['w4c-type'],$response->code)
             );
-          else
-            $row = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}".Widget4Call_Plugin::W4C_DB_WIDGET." SET name='%s',type='%s', code='%s' where _id ='%s';",$_POST['w4c-name'],$_POST['w4c-type'],$response->code, $response->id));
+          } else {
+
+            $row = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}".Widget4Call_Plugin::W4C_DB_WIDGET." SET name='%s',type='%s', code='%s' where _id ='%s';",$_POST['w4c-name'],$_POST['w4c-type'],$response->code
+              , $response->id));
+          }
           if($row || !empty($_POST['_id'])){
             $id = ($wpdb->insert_id == 0)? $_GET['id'] : $wpdb->insert_id;
             $_SESSION['w4c-flash'] = 'success';
@@ -393,7 +428,6 @@ class Widget4CallFormPage
           }else
             add_settings_error('w4cAddWidget', 'settings_updated', 'Une erreur est survenue.' ,'error');
         } else {
-          var_dump($response);
           $errorMsg = '';
           foreach ($response->errors as $error) {
             $errorMsg .= $error.'<br/>';

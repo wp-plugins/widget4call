@@ -13,6 +13,7 @@ class Widget4CallListPage {
         if(!empty($w4c_private_key)) {
           $response = wp_remote_get('https://w4c.widget4call.fr/wp/'.get_option('w4c_private_key').'/widgets');
           $response = json_decode(wp_remote_retrieve_body($response));
+
           if($response->status == 'ok'){
             if(empty($response->data)){
               ?><p>Vous n'avez pas crée de widgets.</p><?php
@@ -22,6 +23,7 @@ class Widget4CallListPage {
                   <tr>
                     <th class="manage-column column-columnname" scope="col">Nom du Widget</th>
                     <th class="manage-column column-columnname" scope="col">Shortcode</th>
+                    <th class="manage-column column-columnname" scope="col">Page de Test</th>
                     <th class="manage-column column-columnname" scope="col">Destinations</th>
                   </tr>
                 </thead>
@@ -29,6 +31,7 @@ class Widget4CallListPage {
                   <tr>
                     <th class="manage-column column-columnname" scope="col">Nom du Widget</th>
                     <th class="manage-column column-columnname" scope="col">Shortcode</th>
+                    <th class="manage-column column-columnname" scope="col">Page de Test</th>
                     <th class="manage-column column-columnname" scope="col">Destinations</th>
                   </tr>
                 </tfoot>
@@ -36,7 +39,17 @@ class Widget4CallListPage {
                   foreach($response->data as $widget){ ?>
                     <tr><?php
                       $row = $wpdb->get_row($wpdb->prepare("SELECT id, _id, name FROM {$wpdb->prefix}".Widget4Call_Plugin::W4C_DB_WIDGET." WHERE _id = '%s'", $widget->_id), OBJECT);
-                      if(is_null($row)){?>
+                      if($widget->type == 'dev-mode') { ?>
+                          <td>
+                          <strong><a href="<?php echo admin_url('admin.php?page=w4c_widget_form&id='.$row->id)?>" class="row-title"><?php echo $widget->name; ?></a></strong>
+                          <div class="row-actions">
+                            <span class="edit"><a href="<?php echo admin_url('admin.php?page=w4c_widget_form&id='.$row->id)?>">Modifier</a></span> |
+                            <span class="delete"><a href="<?php echo admin_url('admin.php?page=w4c_widget_delete&_id='.$widget->_id)?>">Supprimer</a></span>
+                          </div>
+                        </td>
+                        <td></td>
+                        <td><a href="<?php echo admin_url('admin.php?page=w4c_devmode&_id='.$widget->_id)?>">Test widget</a></td>
+                      <?php } elseif(is_null($row)){?>
                         <td>
                           <strong><?php echo $widget->name; ?></strong>
                           <div class="row-actions">
@@ -44,6 +57,7 @@ class Widget4CallListPage {
                           </div>
                         </td>
                         <td><a href="<?php echo admin_url('admin.php?page=w4c_add_external_widget&_id='.$widget->_id)?>">Générer shortcode</a></td>
+                        <td></td>
                         <?php
                       } else{ ?>
                         <td>
@@ -53,8 +67,11 @@ class Widget4CallListPage {
                             <span class="delete"><a href="<?php echo admin_url('admin.php?page=w4c_widget_delete&_id='.$widget->_id)?>">Supprimer</a></span>
                           </div>
                         </td>
+
                         <td><input type="text" readonly="readonly" value="[w4c id='<?php echo $row->id ?>']" class="input-shortcode"/></td>
+                        <td></td>
                       <?php } ?>
+
                       <td><?php echo implode(' - ',$widget->destinations) ?></td>
                     </tr><?php
                   } ?>

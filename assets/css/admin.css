@@ -46,3 +46,14 @@
 	font-weight: bold;
 }
 #w4c-content .input-shortcode{ text-align: center;}
+
+#w4c-content .hidden_element {
+	visibility: collapse;
+}
+
+#w4c-content .visible_element {
+	visibility: unset;
+}
+#w4c-content .validation-error{
+	color:red;
+}
